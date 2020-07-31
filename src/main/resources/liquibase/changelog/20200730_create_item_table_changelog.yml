@@ -1,0 +1,95 @@
+databaseChangeLog:
+  - changeSet:
+      id: create-user-table
+      author: Glenn Sabales
+      changes:
+        - createTable:
+            columns:
+              - column:
+                  name: id
+                  type: INT UNSIGNED
+                  autoIncrement: true
+                  constraints:
+                    nullable: false
+                    primaryKey: true
+              - column:
+                  name: first_name
+                  type: VARCHAR(250)
+                  constraints:
+                    nullable: false
+              - column:
+                  name: last_name
+                  type: VARCHAR(250)
+                  constraints:
+                    nullable: false
+            tableName: user
+  - changeSet:
+      id: create-cart-table
+      author: Glenn Sabales
+      changes:
+        - createTable:
+            columns:
+              - column:
+                  name: id
+                  type: INT UNSIGNED
+                  autoIncrement: true
+                  constraints:
+                    nullable: false
+                    primaryKey: true
+              - column:
+                  name: user_id
+                  type: INT UNSIGNED
+            tableName: cart
+  - changeSet:
+      id: create-item-table
+      author: Glenn Sabales
+      changes:
+        - createTable:
+            columns:
+              - column:
+                  name: id
+                  type: INT UNSIGNED
+                  autoIncrement: true
+                  constraints:
+                    nullable: false
+                    primaryKey: true
+              - column:
+                  name: name
+                  type: VARCHAR(250)
+                  constraints:
+                    nullable: false
+              - column:
+                  name: description
+                  type: VARCHAR(250)
+              - column:
+                  name: image
+                  type: VARCHAR(250)
+              - column:
+                  name: price
+                  type: DECIMAL(10,2) UNSIGNED
+              - column:
+                  name: quantity
+                  type: INT UNSIGNED
+            tableName: item
+  - changeSet:
+      id: create-user_id-fk-cart
+      author: Glenn Sabales
+      changes:
+        - addForeignKeyConstraint:
+            baseColumnNames: user_id
+            baseTableName: cart
+            constraintName: fk_cart_user_id
+            deferrable: false
+            initiallyDeferred: false
+            onDelete: RESTRICT
+            onUpdate: RESTRICT
+            referencedColumnNames: id
+            referencedTableName: user
+            validate: true
+  - changeSet:
+      id: load-course-data
+      author: Glenn Sabales
+      changes:
+        - loadData:
+            tableName: item
+            file: liquibase/data/20200730_item_data.csv

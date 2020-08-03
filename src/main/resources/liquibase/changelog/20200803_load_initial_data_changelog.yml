@@ -1,0 +1,22 @@
+databaseChangeLog:
+  - changeSet:
+      id: load-user-data
+      author: Glenn Sabales
+      changes:
+        - loadData:
+            tableName: user
+            file: liquibase/data/20200803_user_data.csv
+  - changeSet:
+      id: load-cart-data
+      author: Glenn Sabales
+      changes:
+        - loadData:
+            tableName: cart
+            file: liquibase/data/20200803_cart_data.csv
+  - changeSet:
+      id: load-item-data
+      author: Glenn Sabales
+      changes:
+        - loadData:
+            tableName: item
+            file: liquibase/data/20200730_item_data.csv

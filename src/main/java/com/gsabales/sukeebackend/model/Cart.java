@@ -1,7 +1,10 @@
 package com.gsabales.sukeebackend.model;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import lombok.ToString;
 
 import javax.persistence.Entity;
 import javax.persistence.ForeignKey;
@@ -11,7 +14,7 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
-import java.util.Set;
+import java.util.List;
 
 @Entity
 @Data
@@ -27,8 +30,11 @@ public class Cart {
             name="user_id",
             referencedColumnName = "id",
             foreignKey = @ForeignKey(name="fk_cart_user_id"))
+    @JsonBackReference
+    @ToString.Exclude
     private User user;
 
-//    @OneToMany(mappedBy = "cart")
-//    private Set<Item> item;
+    @OneToMany(mappedBy = "cart")
+    @JsonManagedReference
+    private List<Item> item;
 }

@@ -70,9 +70,12 @@ databaseChangeLog:
               - column:
                   name: quantity
                   type: INT UNSIGNED
+              - column:
+                  name: cart_id
+                  type: INT UNSIGNED
             tableName: item
   - changeSet:
-      id: create-user_id-fk-cart
+      id: create-fk_cart_user_id
       author: Glenn Sabales
       changes:
         - addForeignKeyConstraint:
@@ -87,9 +90,17 @@ databaseChangeLog:
             referencedTableName: user
             validate: true
   - changeSet:
-      id: load-course-data
+      id: create-fk_item_cart_id
       author: Glenn Sabales
       changes:
-        - loadData:
-            tableName: item
-            file: liquibase/data/20200730_item_data.csv
+        - addForeignKeyConstraint:
+            baseColumnNames: cart_id
+            baseTableName: item
+            constraintName: fk_item_cart_id
+            deferrable: false
+            initiallyDeferred: false
+            onDelete: RESTRICT
+            onUpdate: RESTRICT
+            referencedColumnNames: id
+            referencedTableName: cart
+            validate: true

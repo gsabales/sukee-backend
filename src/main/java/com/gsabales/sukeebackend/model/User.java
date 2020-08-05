@@ -3,13 +3,14 @@ package com.gsabales.sukeebackend.model;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 import lombok.Data;
 import lombok.NoArgsConstructor;
-import lombok.ToString;
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
+import java.util.List;
 
 @Entity
 @Data
@@ -22,7 +23,11 @@ public class User {
     private String firstName;
     private String lastName;
 
-    @JsonManagedReference
     @OneToOne(mappedBy = "user")
+    @JsonManagedReference
     private Cart cart;
+
+    @OneToMany(mappedBy = "customer")
+    @JsonManagedReference
+    private List<Order> orders;
 }

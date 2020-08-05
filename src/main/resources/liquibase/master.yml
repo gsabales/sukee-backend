@@ -3,3 +3,5 @@ databaseChangeLog:
       file: liquibase/changelog/20200730_create_item_table_changelog.yml
   - include:
       file: liquibase/changelog/20200803_load_initial_data_changelog.yml
+  - include:
+      file: liquibase/changelog/20200805_create_order_details_table_changelog.yml

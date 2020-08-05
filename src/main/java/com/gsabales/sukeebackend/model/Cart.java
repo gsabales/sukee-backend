@@ -36,5 +36,5 @@ public class Cart {
 
     @OneToMany(mappedBy = "cart")
     @JsonManagedReference
-    private List<Item> item;
+    private List<Item> items;
 }

@@ -1,0 +1,67 @@
+databaseChangeLog:
+  - changeSet:
+      id: create-order_details-table
+      author: Glenn Sabales
+      changes:
+        - createTable:
+            columns:
+              - column:
+                  name: id
+                  autoIncrement: true
+                  type: INT UNSIGNED
+                  constraints:
+                    nullable: false
+                    primaryKey: true
+              - column:
+                  name: order_date
+                  type: DATETIME
+              - column:
+                  name: order_status
+                  type: VARCHAR(50)
+            tableName: order
+        - createTable:
+            columns:
+              - column:
+                  name: order_id
+                  type: INT UNSIGNED
+                  constraints:
+                    nullable: false
+                    primaryKey: true
+              - column:
+                  name: item_id
+                  type: INT UNSIGNED
+                  constraints:
+                    nullable: false
+                    primaryKey: true
+            tableName: order_details
+        - addForeignKeyConstraint:
+            constraintName: fk_order_item_order_id
+            baseTableName: order_details
+            baseColumnNames: order_id
+            referencedTableName: order
+            referencedColumnNames: id
+        - addForeignKeyConstraint:
+            constraintName: fk_order_item_item_id
+            baseTableName: order_details
+            baseColumnNames: item_id
+            referencedTableName: item
+            referencedColumnNames: id
+  - changeSet:
+      id: add-user-id-column
+      author: Glenn Sabales
+      changes:
+        - addColumn:
+            tableName: order
+            columns:
+              - column:
+                  name: customer_id
+                  type: INT UNSIGNED
+                  afterColumn: order_status
+                  constraints:
+                    nullable: false
+        - addForeignKeyConstraint:
+            constraintName: fk_order_user_customer_id
+            baseTableName: order
+            baseColumnNames: customer_id
+            referencedTableName: user
+            referencedColumnNames: id

@@ -68,7 +68,7 @@ databaseChangeLog:
                   name: price
                   type: DECIMAL(10,2) UNSIGNED
               - column:
-                  name: quantity
+                  name: stock
                   type: INT UNSIGNED
               - column:
                   name: cart_id

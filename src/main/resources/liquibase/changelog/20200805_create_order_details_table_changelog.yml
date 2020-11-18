@@ -18,7 +18,7 @@ databaseChangeLog:
               - column:
                   name: order_status
                   type: VARCHAR(50)
-            tableName: order
+            tableName: orders
         - createTable:
             columns:
               - column:
@@ -38,7 +38,7 @@ databaseChangeLog:
             constraintName: fk_order_item_order_id
             baseTableName: order_details
             baseColumnNames: order_id
-            referencedTableName: order
+            referencedTableName: orders
             referencedColumnNames: id
         - addForeignKeyConstraint:
             constraintName: fk_order_item_item_id
@@ -51,7 +51,7 @@ databaseChangeLog:
       author: Glenn Sabales
       changes:
         - addColumn:
-            tableName: order
+            tableName: orders
             columns:
               - column:
                   name: customer_id
@@ -61,7 +61,7 @@ databaseChangeLog:
                     nullable: false
         - addForeignKeyConstraint:
             constraintName: fk_order_user_customer_id
-            baseTableName: order
+            baseTableName: orders
             baseColumnNames: customer_id
             referencedTableName: user
             referencedColumnNames: id

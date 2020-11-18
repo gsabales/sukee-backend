@@ -6,6 +6,7 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 import lombok.ToString;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.ForeignKey;
 import javax.persistence.GeneratedValue;
@@ -34,7 +35,8 @@ public class Cart {
     @ToString.Exclude
     private User user;
 
-    @OneToMany(mappedBy = "cart")
+    // CascadeType.ALL means that every change in Cart must also reflect on Items
+    @OneToMany(mappedBy = "cart", cascade = CascadeType.ALL)
     @JsonManagedReference
     private List<Item> items;
 }

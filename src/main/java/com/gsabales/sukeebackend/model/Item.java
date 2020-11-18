@@ -1,9 +1,6 @@
 package com.gsabales.sukeebackend.model;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
-import com.fasterxml.jackson.annotation.JsonIgnore;
-import com.fasterxml.jackson.databind.annotation.JsonSerialize;
-import com.fasterxml.jackson.databind.ser.std.ToStringSerializer;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 import lombok.ToString;
@@ -44,5 +41,5 @@ public class Item {
     private Cart cart;
 
     @ManyToMany(mappedBy = "itemsOrdered")
-    private List<Order> orders;
+    private List<Orders> orders;
 }
